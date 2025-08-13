@@ -46,9 +46,8 @@
 
         .toggle-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0 30px 0;
+            justify-content: end;
+            margin: 10px 0 10px 0;
             gap: 15px;
         }
 
@@ -190,7 +189,6 @@
 
             h1 {
                 font-size: 2rem;
-                margin-bottom: 20px;
             }
 
             th, td {
@@ -203,7 +201,6 @@
             }
 
             .toggle-container {
-                flex-direction: column;
                 gap: 10px;
             }
         }
@@ -314,7 +311,7 @@
                         // Redondear a miles (terminados en 000)
                         finalPriceARS = Math.round(finalPriceARS / 1000) * 1000;
                         
-                        priceCell.innerHTML = `${finalPriceARS.toLocaleString('es-AR')}`;
+                        priceCell.innerHTML = '$'+`${finalPriceARS.toLocaleString('es-AR')}`;
                     }
                 });
 
@@ -351,7 +348,7 @@
     
     <div class="container">
         <h1>Bypass iPhone</h1>
-        <p style="text-align: center; color: #718096; margin-bottom: 20px; font-size: 1rem; font-weight: 400;">Lista de precios actualizada</p>
+        <p style="text-align: center; color: #718096; margin-bottom: 20px; font-size: 1rem; font-weight: 400;">Lista actualizada en <b>pesos argentinos</b></p>
         
         <div class="toggle-container">
             <span class="toggle-label">Gremio</span>
