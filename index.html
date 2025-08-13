@@ -44,6 +44,71 @@
             background-clip: text;
         }
 
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0 30px 0;
+            gap: 15px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 45px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e0);
+            transition: .3s;
+            border-radius: 30px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            transition: .3s;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(21px);
+        }
+
+        .toggle-label {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-label.active {
+            color: #667eea;
+        }
+
         .table-wrapper {
             overflow-x: auto;
             border-radius: 15px;
@@ -82,7 +147,7 @@
         }
 
         td {
-            padding: 5px;
+            padding: 15px;
             text-align: center;
             border-bottom: 1px solid #e2e8f0;
             font-weight: 500;
@@ -136,6 +201,11 @@
             th:first-child, td:first-child {
                 padding-left: 15px;
             }
+
+            .toggle-container {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
         .footer {
@@ -149,6 +219,7 @@
             color: #4A90E2;
             animation: pulse 1.5s ease-in-out infinite alternate;
         }
+        
         .error {
             color: #E53E3E;
         }
@@ -205,6 +276,13 @@
         'iPhone 16 Pro Max': { reseller: 138, endUser: 148 }
     };
 
+    let isGremioMode = false;
+
+    function toggleGremioMode() {
+        isGremioMode = !isGremioMode;
+        updatePrices();
+    }
+
     function updatePrices() {
         // Mostrar loading
         const prices = document.querySelectorAll('.price');
@@ -224,26 +302,26 @@
                 const rows = document.querySelectorAll('tbody tr');
                 rows.forEach(row => {
                     const modelName = row.querySelector('.model-name').textContent;
-                    const resellerPriceCell = row.querySelector('.reseller-price');
-                    const endUserPriceCell = row.querySelector('.end-user-price');
+                    const priceCell = row.querySelector('.price-cell');
                     
                     if (basePrices[modelName]) {
+                        // Usar precio de gremio o público según el toggle
+                        const basePrice = isGremioMode ? basePrices[modelName].reseller : basePrices[modelName].endUser;
+                        
                         // Calcular precio base + $1000 
-                        let resellerPriceARS = (basePrices[modelName].reseller * usdtPrice) + 1000;
-                        let endUserPriceARS = (basePrices[modelName].endUser * usdtPrice) + 1000;
+                        let finalPriceARS = (basePrice * usdtPrice) + 1000;
                         
                         // Redondear a miles (terminados en 000)
-                        resellerPriceARS = Math.round(resellerPriceARS / 1000) * 1000;
-                        endUserPriceARS = Math.round(endUserPriceARS / 1000) * 1000;
+                        finalPriceARS = Math.round(finalPriceARS / 1000) * 1000;
                         
-                        resellerPriceCell.innerHTML = `${resellerPriceARS.toLocaleString('es-AR')}`;
-                        endUserPriceCell.innerHTML = `${endUserPriceARS.toLocaleString('es-AR')}`;
+                        priceCell.innerHTML = `${finalPriceARS.toLocaleString('es-AR')}`;
                     }
                 });
 
                 // Actualizar footer con información actual
                 const footer = document.querySelector('.footer p');
-                footer.innerHTML = `Precios actualizados automáticamente - USDT: ${usdtPrice.toFixed(2)} ARS<br>
+                const modeText = isGremioMode ? 'Gremio' : 'Público';
+                footer.innerHTML = `Precios ${modeText} - USDT: ${usdtPrice.toFixed(2)} ARS<br>
                                   <small style="font-size: 0.8em; opacity: 0.7;">Última actualización: ${new Date().toLocaleString('es-AR')}</small>`;
             },
             error: function(xhr, status, error) {
@@ -273,151 +351,132 @@
     
     <div class="container">
         <h1>Bypass iPhone</h1>
-        <p style="text-align: center; color: #718096; margin-bottom: 30px; font-size: 1rem; font-weight: 400;">Lista de precios actualizada</p>
+        <p style="text-align: center; color: #718096; margin-bottom: 20px; font-size: 1rem; font-weight: 400;">Lista de precios actualizada</p>
+        
+        <div class="toggle-container">
+            <span class="toggle-label">Gremio</span>
+            <label class="toggle-switch">
+                <input type="checkbox" onchange="toggleGremioMode()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
                         <th>Model</th>
-                        <th>Gremio</th>
-                        <th>Publico</th>
+                        <th>Precio</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td class="model-name">iPhone XR/XS/XS MAX</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 11</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 11 PRO</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 11 PRO MAX</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone SE (2nd Gen)</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 12 MINI</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 12</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 12 PRO</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 12 PRO MAX</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone SE (3rd Gen)</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 13 MINI</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 13</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 13 PRO</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 13 PRO MAX</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 14</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 14 PLUS</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 14 PRO</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 14 PRO MAX</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 15</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 15 PLUS</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 15 PRO</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 15 PRO MAX</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 16</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 16 Plus</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 16e</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 16 Pro</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                     <tr>
                         <td class="model-name">iPhone 16 Pro Max</td>
-                        <td class="price reseller-price loading">⏳</td>
-                        <td class="price end-user-price loading">⏳</td>
+                        <td class="price price-cell loading">⏳</td>
                     </tr>
                 </tbody>
             </table>
