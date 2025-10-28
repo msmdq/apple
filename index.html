@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarjeta Desbloqueo iPhone - Liquid Glass</title>
+    <title>Publicidad</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-            background: #0a0a1a;
+            font-family: "DM Sans", sans-serif;
+            background: #181b25;
             display: flex;
             padding: 25px;
             justify-content: center;
@@ -21,104 +21,148 @@
             min-height: 100vh;
             overflow: hidden;
         }
-        
+
+        /* Tarjeta glassmorphism */
         .card {
             max-width: 400px;
             width: 100%;
             min-height: 420px;
-            background: rgba(20, 20, 35, 0.7);
-            backdrop-filter: blur(30px) saturate(200%);
-            -webkit-backdrop-filter: blur(30px) saturate(200%);
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
-                0 8px 32px 0 rgba(0, 0, 0, 0.6),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-                0 20px 60px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
             position: relative;
-            animation: cardEntry 0.6s ease-out;
+            background: linear-gradient(165deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            border: 1px solid rgb(0 0 0 / 81%);
+            box-shadow: 0 10px 35px -12px rgb(0 0 0), 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 25px -4px rgb(0 53 67 / 42%);
+            border-radius: 40px;
+            overflow: hidden;
+            animation: cardEntry 0.9s ease-out;
+            z-index: 1;
         }
 
         @keyframes cardEntry {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(25px) scale(.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .card::before {
+        /* Fondo animado dentro del card */
+        .card-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(0,200,255,0.25), transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(180,0,255,0.25), transparent 55%),
+                radial-gradient(circle at 60% 30%, rgba(255,140,0,0.2), transparent 60%),
+                linear-gradient(115deg,#05060a,#0a0f24,#05060a);
+            animation: bgShift 18s ease-in-out infinite alternate;
+            filter: saturate(140%);
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { filter: hue-rotate(0deg) brightness(0.95); transform: scale(1); }
+            50% { filter: hue-rotate(40deg) brightness(1.05); transform: scale(1.02); }
+        }
+
+        /* Formas morfológicas dentro del card */
+        .fc-shape {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            top: 50%;
+            left: 50%;
+            margin: -210px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 40% 60% 55% 45% / 45% 55% 60% 40%;
+            animation: morph 24s linear infinite, spin 110s linear infinite;
+            background: radial-gradient(circle at 30% 35%, rgba(255,255,255,0.04), transparent 65%);
+            z-index: 0;
+            mix-blend-mode: overlay;
+        }
+
+        .fc-shape:nth-child(2) {
+            width: 280px; 
+            height: 280px; 
+            animation-duration: 32s, 150s;
+            opacity: .55; 
+            filter: blur(2px);
+        }
+
+        .fc-shape:nth-child(3) {
+            width: 180px; 
+            height: 180px; 
+            animation-duration: 18s, 95s;
+            animation-direction: alternate-reverse, reverse;
+            opacity: .35; 
+            filter: blur(1px);
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 42% 58% 55% 45% / 43% 52% 58% 47%; }
+            25% { border-radius: 55% 45% 42% 58% / 47% 60% 40% 53%; }
+            50% { border-radius: 48% 52% 60% 40% / 55% 42% 58% 45%; }
+            75% { border-radius: 58% 42% 45% 55% / 40% 53% 47% 60%; }
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Borde brillante rotatorio */
+        .fc-glow-border {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: 10;
+        }
+
+        .fc-glow-border:before,
+        .fc-glow-border:after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 200px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
-            pointer-events: none;
+            inset: 0;
+            border-radius: inherit;
+            background: conic-gradient(from 0deg, rgba(0,210,255,0.4), transparent 55%, rgba(255,0,200,0.35), transparent 85%, rgba(0,210,255,0.4));
+            animation: rotateHue 14s linear infinite;
+            mix-blend-mode: overlay;
+            opacity: .35;
+        }
+
+        .fc-glow-border:after {
+            filter: blur(28px);
+            opacity: .18;
+        }
+
+        @keyframes rotateHue {
+            to { transform: rotate(360deg); }
         }
         
         .header {
-            background: linear-gradient(135deg, rgba(85, 104, 255, 0.3) 0%, rgba(107, 60, 196, 0.3) 100%);
+            background: transparent;
             backdrop-filter: blur(20px) saturate(180%);
             padding: 20px;
             text-align: center;
             color: white;
             position: relative;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: 
-                linear-gradient(90deg, 
-                    rgba(64, 224, 208, 0.4),
-                    rgba(138, 43, 226, 0.5),
-                    rgba(255, 20, 147, 0.4),
-                    rgba(30, 144, 255, 0.4),
-                    rgba(64, 224, 208, 0.4)
-                );
-            background-size: 200% 100%;
-            animation: wave-slide 5s linear infinite;
-            pointer-events: none;
-            filter: blur(20px);
-            opacity: 0.7;
-        }
-
-        @keyframes wave-slide {
-            to { background-position: 200% 0%; }
+            z-index: 2;
         }
         
         .header p {
-            font-size: 12px;
+            font-size: 14px;
             opacity: 0.9;
-            font-weight: 400;
             text-shadow: 0 2px 8px rgba(0,0,0,0.2);
             margin-bottom: 4px;
-            position: relative;
-            z-index: 1;
         }
-
         .header h1 {
-            font-size: 20px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+            font-size: 24px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 1;
         }
         
         .content {
             padding: 14px 25px 60px;
             position: relative;
+            z-index: 2;
         }
         
         .features {
@@ -134,14 +178,10 @@
             padding: 9px 10px;
             border-radius: 20px;
             text-align: center;
-            font-size: 10.5px;
-            font-weight: 600;
+            font-size: 13px;
             color: rgba(255, 255, 255, 0.9);
             text-transform: uppercase;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 
-                0 4px 15px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -160,30 +200,14 @@
             50% { opacity: 0.4; }
         }
 
-        .feature:hover,
-        .feature.active {
+        .feature:hover {
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                0 6px 20px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                0 0 30px rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
         
         .prices {
             margin: 25px 0;
-        }
-        
-        .prices h3 {
-            text-align: center;
-            font-size: 13px;
-            color: white;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
         .price-row {
@@ -196,11 +220,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 600;
             border: 1px solid rgba(16, 185, 129, 0.3);
-            box-shadow: 
-                0 4px 15px rgba(16, 185, 129, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -222,11 +242,7 @@
         .price-row:hover {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.7) 0%, rgba(5, 150, 105, 0.7) 100%);
             border-color: rgba(16, 185, 129, 0.5);
-            box-shadow: 
-                0 6px 20px rgba(16, 185, 129, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4),
-                0 0 40px rgba(16, 185, 129, 0.2);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
         
         .price-row:last-child {
@@ -234,28 +250,18 @@
         }
         
         .price-row .model {
-            font-size: 12.5px;
+            font-size: 15px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.2);
             position: relative;
             z-index: 1;
         }
         
         .price-row .price {
-            font-size: 17px;
+            font-size: 19px;
             font-weight: 700;
             text-shadow: 0 2px 5px rgba(0,0,0,0.3);
             position: relative;
             z-index: 1;
-        }
-        
-        .info {
-            text-align: center;
-            font-size: 10.5px;
-            color: white;
-            margin-bottom: 12px;
-            line-height: 1.4;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            font-weight: 400;
         }
         
         .contact {
@@ -267,9 +273,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .contact:hover {
@@ -280,32 +284,12 @@
             width: 28px;
             height: 28px;
             flex-shrink: 0;
-            animation: logo-breathe 3s ease-in-out infinite;
-            position: relative;
-            z-index: 1;
-        }
-
-        @keyframes logo-breathe {
-            50% {
-                filter: brightness(1.3) drop-shadow(0 0 12px rgba(255,255,255,0.6));
-            }
         }
         
         .contact-number {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             letter-spacing: 0.5px;
-            line-height: 1;
-            position: relative;
-            z-index: 1;
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .contact-number.enlarge {
-            font-size: 24px;
-            transform: scale(1.05);
-            text-shadow: 0 0 15px rgba(37, 211, 102, 0.5),
-                         0 3px 8px rgba(0,0,0,0.3);
         }
         
         .footer {
@@ -316,41 +300,32 @@
             backdrop-filter: blur(10px);
             padding: 10px;
             text-align: center;
-            font-size: 10.5px;
+            font-size: 12px;
             color: rgba(255, 255, 255, 0.6);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 400;
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-        
-        .price-row.active {
-            transform: translateY(-2px) scale(1.02);
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.7) 0%, rgba(5, 150, 105, 0.7) 100%);
-            border-color: rgba(16, 185, 129, 0.5);
-            box-shadow: 
-                0 6px 20px rgba(16, 185, 129, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4),
-                0 0 40px rgba(16, 185, 129, 0.2);
-        }
-
-        @media print {
-            body { background: white; }
-            .card { box-shadow: none; }
+            z-index: 2;
         }
     </style>
 </head>
 <body>
     <div class="card">
+        <div class="card-bg"></div>
+        <div class="fc-shape"></div>
+        <div class="fc-shape"></div>
+        <div class="fc-shape"></div>
+        <div class="fc-glow-border"></div>
+        
         <div class="header">
             <p>¿Olvidaste tu cuenta de iCloud?</p>
             <h1>Desbloqueamos tu iPhone</h1>
         </div>
         <div class="content">
             <div class="features">
-                <div class="feature">✓ Con Bypass</div>
-                <div class="feature">✓ Full WiFi</div>
-                <div class="feature">⚡ En el día</div>
-                <div class="feature">🏠 A domicilio</div>
+                <div class="feature">✓ Con <b>Bypass</b></div>
+                <div class="feature">✓ Full <b>WiFi</b></div>
+                <div class="feature">⚡ En el <b>día</b></div>
+                <div class="feature">🏠 A <b>domicilio</b></div>
             </div>
             
             <div class="prices">
@@ -362,10 +337,6 @@
                     <span class="model">Desde el <b>14 al 16 Pro Max</b></span>
                     <span class="price">U$D 90</span>
                 </div>
-            </div>
-            
-            <div class="info">
-                Consultanos por otros modelos<br>y otro tipo de reparaciones
             </div>
             
             <a class="contact" href="https://wa.me/5492233493722">
@@ -389,65 +360,8 @@
         </div>
         
         <div class="footer">
-            Servicio profesional y confiable
+            Consultanos por otros equipos y otro tipo de reparaciones
         </div>
     </div>
-
-    <script>
-        // Auto-click animation secuencial para features y precios
-        const features = document.querySelectorAll('.feature');
-        const priceRows = document.querySelectorAll('.price-row');
-        const contactNumber = document.querySelector('.contact-number');
-        const totalItems = features.length + priceRows.length;
-        let currentIndex = 0;
-        let cycleCount = 0;
-        const maxCycles = 2;
-        let animationInterval;
-        
-        function animateSequentially() {
-            // Remover todas las clases active
-            features.forEach(feature => feature.classList.remove('active'));
-            priceRows.forEach(row => row.classList.remove('active'));
-            
-            // Determinar qué elemento activar
-            if (currentIndex < features.length) {
-                // Activar feature
-                features[currentIndex].classList.add('active');
-            } else {
-                // Activar precio
-                const priceIndex = currentIndex - features.length;
-                priceRows[priceIndex].classList.add('active');
-            }
-            
-            // Incrementar el índice
-            currentIndex++;
-            
-            // Verificar si completó un ciclo
-            if (currentIndex >= totalItems) {
-                currentIndex = 0;
-                cycleCount++;
-                
-                // Si completó 2 ciclos, detener después de la última animación
-                if (cycleCount >= maxCycles) {
-                    setTimeout(() => {
-                        clearInterval(animationInterval);
-                        // Remover todas las clases active
-                        features.forEach(feature => feature.classList.remove('active'));
-                        priceRows.forEach(row => row.classList.remove('active'));
-                        // Agrandar el número de WhatsApp con animación
-                        setTimeout(() => {
-                            contactNumber.classList.add('enlarge');
-                        }, 500);
-                    }, 1000);
-                }
-            }
-        }
-        
-        // Iniciar la animación después de 1 segundo
-        setTimeout(() => {
-            animateSequentially(); // Primera animación
-            animationInterval = setInterval(animateSequentially, 1000); // Repetir cada 1 segundo
-        }, 1000);
-    </script>
 </body>
 </html>
