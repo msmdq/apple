@@ -10,475 +10,419 @@
             padding: 0;
             box-sizing: border-box;
         }
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-        background: #0a0a1a;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        padding: 20px;
-        position: relative;
-        overflow: hidden;
-    }
 
-    body::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            radial-gradient(circle at 20% 50%, rgba(85, 104, 255, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(37, 211, 102, 0.12) 0%, transparent 50%),
-            radial-gradient(circle at 40% 20%, rgba(107, 60, 196, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 60% 90%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
-        animation: mesh-move 20s ease-in-out infinite;
-    }
-
-    @keyframes mesh-move {
-        0%, 100% {
-            transform: scale(1) translate(0, 0);
-            opacity: 1;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: #0a0a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
-        33% {
-            transform: scale(1.1) translate(5%, -5%);
+
+
+        
+        .card {
+            width: 400px;
+            min-height: 510px;
+            background: rgba(20, 20, 35, 0.7);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px 0 rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+                0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            animation: cardEntry 0.6s ease-out;
+        }
+
+        @keyframes cardEntry {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, rgba(85, 104, 255, 0.3) 0%, rgba(107, 60, 196, 0.3) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            padding: 18px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, 
+                    rgba(64, 224, 208, 0.4),
+                    rgba(138, 43, 226, 0.5),
+                    rgba(255, 20, 147, 0.4),
+                    rgba(30, 144, 255, 0.4),
+                    rgba(64, 224, 208, 0.4)
+                );
+            background-size: 200% 100%;
+            animation: wave-slide 8s linear infinite;
+            pointer-events: none;
+            filter: blur(20px);
+            opacity: 0.7;
+        }
+
+        @keyframes wave-slide {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 200% 0%;
+            }
+        }
+        
+        .header p {
+            font-size: 13px;
             opacity: 0.9;
+            font-weight: 400;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
         }
-        66% {
-            transform: scale(0.95) translate(-5%, 5%);
-            opacity: 0.95;
-        }
-    }
 
-    body::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            linear-gradient(125deg, 
-                rgba(85, 104, 255, 0.03) 0%,
-                transparent 40%,
-                rgba(37, 211, 102, 0.03) 60%,
-                transparent 100%);
-        animation: gradient-shift 15s ease-in-out infinite alternate;
-    }
-
-    @keyframes gradient-shift {
-        0% {
-            opacity: 0.5;
-            transform: translateX(-10%) rotate(0deg);
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
-        100% {
-            opacity: 0.8;
-            transform: translateX(10%) rotate(3deg);
+        
+        .content {
+            padding: 20px 25px 80px 25px;
+            position: relative;
         }
-    }
-    
-    .card {
-        width: 400px;
-        min-height: 510px;
-        background: rgba(20, 20, 35, 0.7);
-        backdrop-filter: blur(30px) saturate(200%);
-        -webkit-backdrop-filter: blur(30px) saturate(200%);
-        border-radius: 40px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 
-            0 8px 32px 0 rgba(0, 0, 0, 0.6),
-            inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-            0 20px 60px rgba(0, 0, 0, 0.5);
-        overflow: hidden;
-        position: relative;
-        z-index: 1;
-        animation: cardEntry 0.6s ease-out;
-    }
+        
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px) saturate(180%);
+            padding: 12px 10px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-    @keyframes cardEntry {
-        from {
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             opacity: 0;
-            transform: translateY(30px) scale(0.95);
+            animation: subtle-glow 4s ease-in-out infinite;
         }
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
+
+        @keyframes subtle-glow {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.4;
+            }
         }
-    }
 
-    .card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 200px;
-        background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
-        pointer-events: none;
-    }
-    
-    .header {
-        background: linear-gradient(135deg, rgba(85, 104, 255, 0.3) 0%, rgba(107, 60, 196, 0.3) 100%);
-        backdrop-filter: blur(20px) saturate(180%);
-        padding: 18px 20px;
-        text-align: center;
-        color: white;
-        position: relative;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        overflow: hidden;
-    }
-
-    .header::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            linear-gradient(90deg, 
-                rgba(64, 224, 208, 0.4),
-                rgba(138, 43, 226, 0.5),
-                rgba(255, 20, 147, 0.4),
-                rgba(30, 144, 255, 0.4),
-                rgba(64, 224, 208, 0.4)
-            );
-        background-size: 200% 100%;
-        animation: wave-slide 8s linear infinite;
-        pointer-events: none;
-        filter: blur(20px);
-        opacity: 0.7;
-    }
-
-    @keyframes wave-slide {
-        0% {
-            background-position: 0% 0%;
+        .feature:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 6px 20px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 30px rgba(255, 255, 255, 0.1);
         }
-        100% {
-            background-position: 200% 0%;
+        
+        .prices {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px) saturate(180%);
+            border-radius: 25px;
+            padding: 18px 18px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
-    }
-    
-    .header p {
-        font-size: 13px;
-        opacity: 0.9;
-        font-weight: 400;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        margin-bottom: 6px;
-        position: relative;
-        z-index: 1;
-    }
+        
+        .prices h3 {
+            text-align: center;
+            font-size: 14px;
+            color: white;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .price-row {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.5) 0%, rgba(5, 150, 105, 0.5) 100%);
+            backdrop-filter: blur(10px) saturate(180%);
+            color: white;
+            padding: 13px 16px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            box-shadow: 
+                0 4px 15px rgba(16, 185, 129, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .header h1 {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 0;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        position: relative;
-        z-index: 1;
-    }
-    
-    .content {
-        padding: 20px 25px 80px 25px;
-        position: relative;
-    }
-    
-    .features {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-bottom: 18px;
-    }
-    
-    .feature {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(10px) saturate(180%);
-        padding: 12px 10px;
-        border-radius: 20px;
-        text-align: center;
-        font-size: 11px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.9);
-        text-transform: uppercase;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 
-            0 4px 15px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        transition: all 0.6s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .feature::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-        opacity: 0;
-        animation: subtle-glow 4s ease-in-out infinite;
-    }
-
-    @keyframes subtle-glow {
-        0%, 100% {
+        .price-row::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.3) 100%);
             opacity: 0;
+            animation: price-pulse 6s ease-in-out infinite;
         }
-        50% {
-            opacity: 0.4;
+
+        @keyframes price-pulse {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
         }
-    }
 
-    .feature:hover {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.3);
-        box-shadow: 
-            0 6px 20px rgba(0, 0, 0, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2),
-            0 0 30px rgba(255, 255, 255, 0.1);
-    }
-    
-    .prices {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(15px) saturate(180%);
-        border-radius: 25px;
-        padding: 18px 18px;
-        margin-bottom: 18px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 
-            0 8px 25px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-    
-    .prices h3 {
-        text-align: center;
-        font-size: 14px;
-        color: white;
-        margin-bottom: 14px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        font-weight: 600;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-    
-    .price-row {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.5) 0%, rgba(5, 150, 105, 0.5) 100%);
-        backdrop-filter: blur(10px) saturate(180%);
-        color: white;
-        padding: 13px 16px;
-        border-radius: 18px;
-        margin-bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 600;
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        box-shadow: 
-            0 4px 15px rgba(16, 185, 129, 0.25),
-            inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        transition: all 0.6s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .price-row::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.3) 100%);
-        opacity: 0;
-        animation: price-pulse 6s ease-in-out infinite;
-    }
-
-    @keyframes price-pulse {
-        0%, 100% {
-            opacity: 0;
+        .price-row:hover {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.7) 0%, rgba(5, 150, 105, 0.7) 100%);
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 
+                0 6px 20px rgba(16, 185, 129, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 0 40px rgba(16, 185, 129, 0.2);
         }
-        50% {
-            opacity: 1;
+        
+        .price-row:last-child {
+            margin-bottom: 0;
         }
-    }
-
-    .price-row:hover {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.7) 0%, rgba(5, 150, 105, 0.7) 100%);
-        border-color: rgba(16, 185, 129, 0.5);
-        box-shadow: 
-            0 6px 20px rgba(16, 185, 129, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.4),
-            0 0 40px rgba(16, 185, 129, 0.2);
-    }
-    
-    .price-row:last-child {
-        margin-bottom: 0;
-    }
-    
-    .price-row .model {
-        font-size: 13px;
-        text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        position: relative;
-        z-index: 1;
-    }
-    
-    .price-row .price {
-        font-size: 18px;
-        font-weight: 700;
-        text-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        position: relative;
-        z-index: 1;
-    }
-    
-    .info {
-        text-align: center;
-        font-size: 11px;
-        color: white;
-        margin-bottom: 18px;
-        line-height: 1.5;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        font-weight: 400;
-    }
-    
-    .contact {
-        background: linear-gradient(135deg, #25D366 0%, #20ba5a 100%);
-        color: white;
-        padding: 13px 20px;
-        border-radius: 22px;
-        border: none;
-        box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
-        transition: all 0.6s ease;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .contact::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        right: -50%;
-        bottom: -50%;
-        background: linear-gradient(90deg, 
-            transparent,
-            transparent,
-            rgba(255,255,255,0.4),
-            transparent,
-            transparent);
-        background-size: 200% 100%;
-        animation: button-shimmer 3s linear infinite;
-    }
-
-    @keyframes button-shimmer {
-        0% {
-            background-position: -100% 0%;
+        
+        .price-row .model {
+            font-size: 13px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
         }
-        100% {
-            background-position: 100% 0%;
+        
+        .price-row .price {
+            font-size: 18px;
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
-    }
+        
+        .info {
+            text-align: center;
+            font-size: 11px;
+            color: white;
+            margin-bottom: 18px;
+            line-height: 1.5;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            font-weight: 400;
+        }
+        
+        .contact {
+            background: linear-gradient(135deg, #25D366 0%, #20ba5a 100%);
+            color: white;
+            padding: 13px 20px;
+            border-radius: 22px;
+            border: none;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+            transition: all 0.6s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .contact::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.2);
-        transform: translate(-50%, -50%);
-        animation: ripple-effect 3s ease-out infinite;
-    }
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: linear-gradient(90deg, 
+                transparent,
+                transparent,
+                rgba(255,255,255,0.4),
+                transparent,
+                transparent);
+            background-size: 200% 100%;
+            animation: button-shimmer 3s linear infinite;
+        }
 
-    @keyframes ripple-effect {
-        0% {
+        @keyframes button-shimmer {
+            0% {
+                background-position: -100% 0%;
+            }
+            100% {
+                background-position: 100% 0%;
+            }
+        }
+
+        .contact::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
             width: 0;
             height: 0;
-            opacity: 0.5;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            animation: ripple-effect 3s ease-out infinite;
         }
-        100% {
-            width: 350px;
-            height: 350px;
-            opacity: 0;
-        }
-    }
 
-    .contact:hover {
-        background: linear-gradient(135deg, #22c55e 0%, #25D366 100%);
-        box-shadow: 
-            0 12px 32px rgba(37, 211, 102, 0.5),
-            0 0 60px rgba(37, 211, 102, 0.3);
-        transform: scale(1.02);
-    }
+        @keyframes ripple-effect {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.5;
+            }
+            100% {
+                width: 350px;
+                height: 350px;
+                opacity: 0;
+            }
+        }
 
-    .contact:active {
-        transform: scale(0.98);
-    }
-    
-    .whatsapp-logo {
-        width: 30px;
-        height: 30px;
-        flex-shrink: 0;
-        animation: logo-breathe 3s ease-in-out infinite;
-        position: relative;
-        z-index: 1;
-    }
+        .contact:hover {
+            background: linear-gradient(135deg, #22c55e 0%, #25D366 100%);
+            box-shadow: 
+                0 12px 32px rgba(37, 211, 102, 0.5),
+                0 0 60px rgba(37, 211, 102, 0.3);
+            transform: scale(1.02);
+        }
 
-    @keyframes logo-breathe {
-        0%, 100% {
-            filter: brightness(1) drop-shadow(0 0 0px rgba(255,255,255,0));
+        .contact:active {
+            transform: scale(0.98);
         }
-        50% {
-            filter: brightness(1.3) drop-shadow(0 0 12px rgba(255,255,255,0.6));
+        
+        .whatsapp-logo {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            animation: logo-breathe 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
         }
-    }
-    
-    .contact-number {
-        font-size: 22px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        line-height: 1;
-        position: relative;
-        z-index: 1;
-    }
-    
-    .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background: rgba(20, 20, 35, 0.8);
-        backdrop-filter: blur(10px);
-        padding: 15px;
-        text-align: center;
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.6);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        font-weight: 400;
-        text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    }
-    
-    @media print {
-        body {
-            background: white;
-        }
-        .card {
-            box-shadow: none;
-        }
-    }
-</style>
-```
 
+        @keyframes logo-breathe {
+            0%, 100% {
+                filter: brightness(1) drop-shadow(0 0 0px rgba(255,255,255,0));
+            }
+            50% {
+                filter: brightness(1.3) drop-shadow(0 0 12px rgba(255,255,255,0.6));
+            }
+        }
+        
+        .contact-number {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(20, 20, 35, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 400;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .card {
+                box-shadow: none;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="card">
@@ -486,56 +430,54 @@
             <p>¿Olvidaste tu cuenta de iCloud?</p>
             <h1>Desbloqueamos tu iPhone</h1>
         </div>
-
-```
-    <div class="content">
-        <div class="features">
-            <div class="feature">✓ Con Bypass</div>
-            <div class="feature">✓ Full WiFi</div>
-            <div class="feature">⚡ En el día</div>
-            <div class="feature">🏠 A domicilio</div>
-        </div>
         
-        <div class="prices">
-            <h3>💰 Precios</h3>
-            <div class="price-row">
-                <span class="model">11 al 13 Pro Max</span>
-                <span class="price">U$D 65</span>
+        <div class="content">
+            <div class="features">
+                <div class="feature">✓ Con Bypass</div>
+                <div class="feature">✓ Full WiFi</div>
+                <div class="feature">⚡ En el día</div>
+                <div class="feature">🏠 A domicilio</div>
             </div>
-            <div class="price-row">
-                <span class="model">14 al 16 Pro Max</span>
-                <span class="price">U$D 90</span>
+            
+            <div class="prices">
+                <h3>💰 Precios</h3>
+                <div class="price-row">
+                    <span class="model">11 al 13 Pro Max</span>
+                    <span class="price">U$D 65</span>
+                </div>
+                <div class="price-row">
+                    <span class="model">14 al 16 Pro Max</span>
+                    <span class="price">U$D 90</span>
+                </div>
+            </div>
+            
+            <div class="info">
+                Consultanos por otros modelos<br>y otro tipo de reparaciones
+            </div>
+            
+            <div class="contact">
+                <svg class="whatsapp-logo" viewBox="0 0 175.216 175.552" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="b" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#57d163"/>
+                            <stop offset="1" stop-color="#23b33a"/>
+                        </linearGradient>
+                        <filter id="a" width="1.115" height="1.114" x="-.057" y="-.057" color-interpolation-filters="sRGB">
+                            <feGaussianBlur stdDeviation="3.531"/>
+                        </filter>
+                    </defs>
+                    <path d="m54.532 138.45 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.523h.023c33.707 0 61.139-27.426 61.153-61.135.006-16.335-6.349-31.696-17.895-43.251A60.75 60.75 0 0 0 87.94 25.983c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.558zm-40.811 23.544L24.16 123.88c-6.438-11.154-9.825-23.808-9.821-36.772.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954zm0 0" fill="#b3b3b3" filter="url(#a)"/>
+                    <path d="m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z" fill="#ffffff"/>
+                    <path d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z" fill="url(#b)"/>
+                    <path d="M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647" fill="#ffffff" fill-rule="evenodd"/>
+                </svg>
+                <span class="contact-number">223 349 3722</span>
             </div>
         </div>
         
-        <div class="info">
-            Consultanos por otros modelos<br>y otro tipo de reparaciones
-        </div>
-        
-        <div class="contact">
-            <svg class="whatsapp-logo" viewBox="0 0 175.216 175.552" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="b" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stop-color="#57d163"/>
-                        <stop offset="1" stop-color="#23b33a"/>
-                    </linearGradient>
-                    <filter id="a" width="1.115" height="1.114" x="-.057" y="-.057" color-interpolation-filters="sRGB">
-                        <feGaussianBlur stdDeviation="3.531"/>
-                    </filter>
-                </defs>
-                <path d="m54.532 138.45 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.523h.023c33.707 0 61.139-27.426 61.153-61.135.006-16.335-6.349-31.696-17.895-43.251A60.75 60.75 0 0 0 87.94 25.983c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.558zm-40.811 23.544L24.16 123.88c-6.438-11.154-9.825-23.808-9.821-36.772.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954zm0 0" fill="#b3b3b3" filter="url(#a)"/>
-                <path d="m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z" fill="#ffffff"/>
-                <path d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z" fill="url(#b)"/>
-                <path d="M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647" fill="#ffffff" fill-rule="evenodd"/>
-            </svg>
-            <span class="contact-number">223 349 3722</span>
+        <div class="footer">
+            Servicio profesional y confiable
         </div>
     </div>
-    
-    <div class="footer">
-        Servicio profesional y confiable
-    </div>
-</div>
-
 </body>
 </html>
