@@ -37,6 +37,10 @@
             overflow: hidden;
             animation: cardEntry 0.9s ease-out;
             z-index: 1;
+            /* Fixes para iOS */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            isolation: isolate;
         }
 
         @keyframes cardEntry {
