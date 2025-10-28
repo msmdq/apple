@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicidad</title>
+    <title>Tarjeta Desbloqueo iPhone - Liquid Glass</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
         * {
@@ -29,18 +29,17 @@
             min-height: 420px;
             position: relative;
             background: linear-gradient(165deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
-            backdrop-filter: blur(18px) saturate(160%);
-            -webkit-backdrop-filter: blur(18px) saturate(160%);
             border: 1px solid rgb(0 0 0 / 81%);
             box-shadow: 0 10px 35px -12px rgb(0 0 0), 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 25px -4px rgb(0 53 67 / 42%);
             border-radius: 40px;
-            overflow: hidden;
             animation: cardEntry 0.9s ease-out;
             z-index: 1;
             /* Fixes para iOS */
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
             isolation: isolate;
+            -webkit-clip-path: inset(0 round 40px);
+            clip-path: inset(0 round 40px);
         }
 
         @keyframes cardEntry {
@@ -60,6 +59,11 @@
             animation: bgShift 18s ease-in-out infinite alternate;
             filter: saturate(140%);
             z-index: 0;
+            border-radius: 40px;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
         }
 
         @keyframes bgShift {
@@ -81,6 +85,8 @@
             background: radial-gradient(circle at 30% 35%, rgba(255,255,255,0.04), transparent 65%);
             z-index: 0;
             mix-blend-mode: overlay;
+            transform: translate(-50%, -50%);
+            will-change: transform;
         }
 
         .fc-shape:nth-child(2) {
@@ -116,8 +122,9 @@
             position: absolute;
             inset: 0;
             pointer-events: none;
-            border-radius: inherit;
+            border-radius: 40px;
             z-index: 10;
+            overflow: hidden;
         }
 
         .fc-glow-border:before,
@@ -125,7 +132,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            border-radius: inherit;
+            border-radius: 40px;
             background: conic-gradient(from 0deg, rgba(0,210,255,0.4), transparent 55%, rgba(255,0,200,0.35), transparent 85%, rgba(0,210,255,0.4));
             animation: rotateHue 14s linear infinite;
             mix-blend-mode: overlay;
@@ -150,6 +157,7 @@
             position: relative;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 2;
+            border-radius: 40px 40px 0 0;
         }
         
         .header p {
@@ -309,6 +317,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
             z-index: 2;
+            border-radius: 0 0 40px 40px;
         }
     </style>
 </head>
