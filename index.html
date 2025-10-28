@@ -306,75 +306,6 @@
         position: relative;
         overflow: hidden;
     }
-
-    .contact::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            linear-gradient(90deg, 
-                rgba(255, 255, 255, 0.3),
-                rgba(200, 255, 220, 0.4),
-                rgba(255, 255, 255, 0.5),
-                rgba(180, 255, 200, 0.4),
-                rgba(255, 255, 255, 0.3)
-            );
-        background-size: 200% 100%;
-        animation: button-shimmer 3s linear infinite;
-        pointer-events: none;
-        filter: blur(10px);
-        opacity: 0.7;
-    }
-
-    @keyframes button-shimmer {
-        0% {
-            background-position: 0% 0%;
-        }
-        100% {
-            background-position: 200% 0%;
-        }
-    }
-
-    .contact::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.2);
-        transform: translate(-50%, -50%);
-        animation: ripple-effect 3s ease-out infinite;
-    }
-
-    @keyframes ripple-effect {
-        0% {
-            width: 0;
-            height: 0;
-            opacity: 0.5;
-        }
-        100% {
-            width: 350px;
-            height: 350px;
-            opacity: 0;
-        }
-    }
-
-    .contact:hover {
-        background: linear-gradient(135deg, #22c55e 0%, #25D366 100%);
-        box-shadow: 
-            0 12px 32px rgba(37, 211, 102, 0.5),
-            0 0 60px rgba(37, 211, 102, 0.3);
-        transform: scale(1.02);
-    }
-
-    .contact:active {
-        transform: scale(0.98);
-    }
     
     .whatsapp-logo {
         width: 28px;
@@ -427,7 +358,6 @@
         }
     }
 </style>
-```
 
 </head>
 <body>
@@ -436,8 +366,6 @@
             <p>¿Olvidaste tu cuenta de iCloud?</p>
             <h1>Desbloqueamos tu iPhone</h1>
         </div>
-
-```
     <div class="content">
         <div class="features">
             <div class="feature">✓ Con Bypass</div>
