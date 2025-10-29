@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarjeta Desbloqueo iPhone - Liquid Glass</title>
+    <title>Bypass iPhone - iUnlock.es</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
         * {
@@ -34,7 +34,6 @@
             border-radius: 40px;
             animation: cardEntry 0.9s ease-out;
             z-index: 1;
-            /* Fixes para iOS */
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
             isolation: isolate;
@@ -217,6 +216,75 @@
             border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-1px);
         }
+
+        /* Alert de tiempo limitado */
+        .limited-time-alert {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.5) 0%, rgba(255, 69, 0, 0.5) 100%);
+            backdrop-filter: blur(10px) saturate(180%);
+            border: 1px solid rgba(255, 165, 0, 0.4);
+            border-radius: 18px;
+            padding: 12px 15px;
+            margin:20px 0 -18px;
+            position: relative;
+            overflow: hidden;
+            animation: alertEntry 0.6s ease-out 0.3s both;
+        }
+
+        @keyframes alertEntry {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .limited-time-alert::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 140, 0, 0.3) 100%);
+            opacity: 0;
+            animation: alert-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes alert-pulse {
+            50% { opacity: 1; }
+        }
+
+        .alert-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-icon {
+            font-size: 24px;
+            animation: shake 2s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30% { transform: rotate(-5deg); }
+            20%, 40% { transform: rotate(5deg); }
+        }
+
+        .alert-text {
+            flex: 1;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .alert-text .alert-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .alert-text .alert-subtitle {
+            font-size: 12px;
+            opacity: 0.95;
+        }
         
         .prices {
             margin: 25px 0;
@@ -350,7 +418,6 @@
             const priceSpan = element.querySelector('.price');
             const originalText = priceSpan.textContent;
             
-            // Si ya está en pesos, volver a dólares
             if (priceSpan.textContent.includes('AR$')) {
                 priceSpan.textContent = `U$D ${usdAmount}`;
                 return;
@@ -359,20 +426,14 @@
             element.classList.add('loading');
             
             try {
-                // Obtener el tipo de cambio si no lo tenemos
                 if (!exchangeRate) {
                     const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=USDTARS');
                     const data = await response.json();
                     exchangeRate = parseFloat(data.price);
                 }
                 
-                // Calcular el precio en pesos: (USD * exchangeRate) + 1000
                 const arsPrice = (usdAmount * exchangeRate) + 1000;
-                
-                // Redondear a miles
                 const roundedPrice = Math.round(arsPrice / 1000) * 1000;
-                
-                // Formatear con separador de miles
                 const formattedPrice = roundedPrice.toLocaleString('es-AR');
                 
                 priceSpan.textContent = `AR$ ${formattedPrice}`;
@@ -406,14 +467,25 @@
                 <div class="feature">🏠 A <b>domicilio</b></div>
             </div>
             
+            <!-- Alert de tiempo limitado -->
+            <div class="limited-time-alert">
+                <div class="alert-content">
+                    <span class="alert-icon">⚡</span>
+                    <div class="alert-text">
+                        <div class="alert-title">Solo por tiempo limitado</div>
+                        <div class="alert-subtitle">Aprovechá estos precios especiales</div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="prices">
                 <div class="price-row" onclick="convertPrice(this, 65)">
                     <span class="model">Desde el <b>11 al 13 Pro Max</b></span>
-                    <span class="price" data-usd="65">U$D 65</span>
+                    <span class="price" data-usd="65">AR$ 65.000</span>
                 </div>
                 <div class="price-row" onclick="convertPrice(this, 90)">
                     <span class="model">Desde el <b>14 al 16 Pro Max</b></span>
-                    <span class="price" data-usd="90">U$D 90</span>
+                    <span class="price" data-usd="90">AR$ 65.000</span>
                 </div>
             </div>
             
