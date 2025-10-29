@@ -315,7 +315,9 @@
             opacity: 0;
             animation: price-pulse 6s ease-in-out infinite;
         }
-
+        .hide {
+            display: none;
+        }
         @keyframes price-pulse {
             50% { opacity: 1; }
         }
@@ -480,10 +482,10 @@
             
             <div class="prices">
                 <div class="price-row" onclick="convertPrice(this, 65)">
-                    <span class="model">Desde el <b>11 al 13 Pro Max</b></span>
+                    <span class="model">Desde el <b>11 al 16 Pro Max</b></span>
                     <span class="price" data-usd="65">AR$ 65.000</span>
                 </div>
-                <div class="price-row" onclick="convertPrice(this, 90)">
+                <div class="price-row hide" onclick="convertPrice(this, 90)">
                     <span class="model">Desde el <b>14 al 16 Pro Max</b></span>
                     <span class="price" data-usd="90">AR$ 65.000</span>
                 </div>
