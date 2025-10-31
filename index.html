@@ -146,6 +146,40 @@
         @keyframes rotateHue {
             to { transform: rotate(360deg); }
         }
+
+        /* Marca de agua */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 42px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.08);
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 5;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .watermark::before {
+            content: '223 349 3722';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            opacity: 0.5;
+        }
+
+        .watermark::after {
+            content: '223 349 3722';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            opacity: 0.5;
+        }
         
         .header {
             background: transparent;
@@ -456,6 +490,9 @@
         <div class="fc-shape"></div>
         <div class="fc-shape"></div>
         <div class="fc-glow-border"></div>
+        
+        <!-- Marca de agua -->
+        <div class="watermark">223 349 3722</div>
         
         <div class="header">
             <p>¿Olvidaste tu cuenta de iCloud?</p>
