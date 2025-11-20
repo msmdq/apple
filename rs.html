@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo de Sueldo</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            max-width: 900px;
+            margin: 5px auto;
+            padding: 5px;
+            background: #ffffff;
+        }
+        .recibo {
+            border: 2px solid #000;
+            padding: 8px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+        }
+        .header h2 {
+            margin: 2px 0;
+            font-size: 14px;
+        }
+        .empresa-info {
+            border-bottom: 1px solid #000;
+            padding-bottom: 4px;
+            margin-bottom: 4px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 2px 0;
+            font-size: 9px;
+        }
+        .info-label {
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 6px 0;
+            font-size: 8px;
+        }
+        th {
+            background-color: #e0e0e0;
+            border: 1px solid #000;
+            padding: 3px;
+            text-align: left;
+            font-weight: bold;
+        }
+        td {
+            border: 1px solid #000;
+            padding: 3px;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .total-row {
+            font-weight: bold;
+            background-color: #f5f5f5;
+        }
+        .neto-final {
+            font-size: 10px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 6px;
+            padding: 4px;
+            border: 2px solid #000;
+            background-color: #e8e8e8;
+        }
+        .footer {
+            margin-top: 8px;
+            padding-top: 4px;
+            border-top: 1px solid #000;
+            font-size: 7px;
+        }
+    </style>
+</head>
+<body>
+    <div class="recibo">
+        <div class="header">
+            <h2>RECIBO DE HABERES</h2>
+            <div>RECIBO N°: 182722</div>
+        </div>
+
+    <div class="empresa-info">
+        <div class="info-row">
+            <span><span class="info-label">EMPLEADOR:</span> ADECCO ARGENTINA S.A.</span>
+            <span><span class="info-label">CUIT:</span> 30-65676017-2</span>
+        </div>
+        <div class="info-row">
+            <span><span class="info-label">SUCURSAL:</span> 278 - On Site ARTICO</span>
+        </div>
+        <div class="info-row">
+            <span><span class="info-label">CLIENTE:</span> CONGELADOS ARTICO S.A.</span>
+            <span><span class="info-label">CUIT:</span> 30-65482746-6</span>
+        </div>
+    </div>
+
+    <div class="empresa-info">
+        <div class="info-row">
+            <span><span class="info-label">EMPLEADO:</span> LOYZA, KATHERINE LUJÁN</span>
+            <span><span class="info-label">CUIL:</span> 27-44692315-9</span>
+        </div>
+        <div class="info-row">
+            <span><span class="info-label">DNI:</span> 44.692.315</span>
+            <span><span class="info-label">CATEGORÍA:</span> OPERARIO</span>
+        </div>
+        <div class="info-row">
+            <span><span class="info-label">DOMICILIO:</span> Udine 2276</span>
+        </div>
+        <div class="info-row">
+            <span><span class="info-label">FECHA INGRESO:</span> 30/01/2025</span>
+            <span><span class="info-label">PERÍODO:</span> 01/2025</span>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 10%;">CÓDIGO</th>
+                <th style="width: 50%;">CONCEPTO</th>
+                <th style="width: 20%;" class="text-right">HABERES</th>
+                <th style="width: 20%;" class="text-right">DEDUCCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>100</td>
+                <td>SUELDO BÁSICO</td>
+                <td class="text-right">$ 2.100.000,00</td>
+                <td class="text-right">-</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>ADICIONAL PRESENTISMO</td>
+                <td class="text-right">$ 210.000,00</td>
+                <td class="text-right">-</td>
+            </tr>
+            <tr>
+                <td>105</td>
+                <td>HORAS EXTRAS AL 50%</td>
+                <td class="text-right">$ 180.000,00</td>
+                <td class="text-right">-</td>
+            </tr>
+            <tr>
+                <td>107</td>
+                <td>ANTIGÜEDAD</td>
+                <td class="text-right">$ 105.000,00</td>
+                <td class="text-right">-</td>
+            </tr>
+            <tr>
+                <td>110</td>
+                <td>ASIGNACIÓN NO REMUNERATIVA</td>
+                <td class="text-right">$ 405.000,00</td>
+                <td class="text-right">-</td>
+            </tr>
+            <tr>
+                <td>201</td>
+                <td>JUBILACIÓN (11%)</td>
+                <td class="text-right">-</td>
+                <td class="text-right">$ 274.450,00</td>
+            </tr>
+            <tr>
+                <td>202</td>
+                <td>LEY 19032 (3%)</td>
+                <td class="text-right">-</td>
+                <td class="text-right">$ 74.850,00</td>
+            </tr>
+            <tr>
+                <td>203</td>
+                <td>OBRA SOCIAL (3%)</td>
+                <td class="text-right">-</td>
+                <td class="text-right">$ 74.850,00</td>
+            </tr>
+            <tr>
+                <td>204</td>
+                <td>SINDICATO (2.5%)</td>
+                <td class="text-right">-</td>
+                <td class="text-right">$ 62.375,00</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="2"><strong>TOTAL</strong></td>
+                <td class="text-right"><strong>$ 3.000.000,00</strong></td>
+                <td class="text-right"><strong>$ 486.525,00</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="neto-final">
+        NETO A COBRAR: $ 2.513.475,00
+    </div>
+
+    <div class="footer">
+        <p style="margin: 2px 0;"><strong>IMPORTANTE:</strong> Este recibo cumple con lo establecido en el Art. 140 de la Ley de Contrato de Trabajo N° 20.744.</p>
+        <p style="margin: 2px 0;">Recibí la suma neta consignada precedentemente a mi total conformidad.</p>
+        <br>
+        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+            <div style="text-align: center; width: 45%; font-size: 7px;">
+                _________________________<br>
+                Firma del Empleado
+            </div>
+            <div style="text-align: center; width: 45%; font-size: 7px;">
+                _________________________<br>
+                Aclaración
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
