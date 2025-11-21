@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Un Poco de Todo - Tienda</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
     body {
         font-family: 'Poppins', 'Segoe UI', sans-serif;
@@ -25,7 +26,7 @@
 
     .story-container {
         width: 360px;
-        height: 640px;
+        height: 760px;
         background: linear-gradient(180deg, #FF6B9D 0%, #C06C84 50%, #6C5B7B 100%);
         position: relative;
         overflow: hidden;
@@ -74,32 +75,23 @@
         display: flex;
         flex-direction: column;
         padding: 25px 15px;
-        gap: 18px;
+        gap: 15px;
     }
 
     .header {
         text-align: center;
+        flex-shrink: 0;
     }
 
     .header h1 {
-        font-size: 2.2em;
+        font-family: 'Dancing Script', cursive;
+        font-size: 2.5em;
         color: white;
         text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        font-weight: 900;
-        letter-spacing: 3px;
-        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 2px;
+        line-height: 1.2;
         margin-bottom: 10px;
-    }
-
-    .horario {
-        background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(20px);
-        padding: 8px 20px;
-        border-radius: 20px;
-        color: white;
-        font-size: 0.95em;
-        font-weight: 600;
-        display: inline-block;
     }
 
     .main-content {
@@ -107,12 +99,14 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
+        min-height: 0;
     }
 
     .productos-section {
         background: rgba(255, 255, 255, 0.95);
         border-radius: 18px;
         padding: 15px;
+        flex-shrink: 0;
     }
 
     .section-title {
@@ -133,9 +127,9 @@
     .tag {
         background: linear-gradient(135deg, #FF6B9D, #C06C84);
         color: white;
-        padding: 6px 12px;
+        padding: 7px 14px;
         border-radius: 12px;
-        font-size: 0.7em;
+        font-size: 0.85em;
         font-weight: 600;
     }
 
@@ -143,13 +137,11 @@
         background: rgba(255, 255, 255, 0.95);
         border-radius: 18px;
         padding: 15px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
+        flex-shrink: 0;
     }
 
     .promo-title {
-        font-size: 1.3em;
+        font-size: 1.4em;
         color: #FF6B9D;
         font-weight: 900;
         text-align: center;
@@ -160,8 +152,6 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        flex: 1;
-        justify-content: center;
     }
 
     .promo-item {
@@ -175,37 +165,53 @@
     }
 
     .promo-name {
-        font-size: 0.85em;
+        font-size: 0.9em;
         font-weight: 600;
     }
 
     .promo-price {
-        font-size: 1.2em;
+        font-size: 1.3em;
         font-weight: 900;
     }
 
     .footer {
         text-align: center;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .horario {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        padding: 8px 20px;
+        border-radius: 20px;
+        color: white;
+        font-size: 0.9em;
+        font-weight: 600;
     }
 
     .contact {
-        background: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(20px);
-        padding: 12px 15px;
+        padding: 14px 15px;
         border-radius: 15px;
-        color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .contact-line {
-        font-size: 0.9em;
-        font-weight: 600;
-        margin: 4px 0;
+        font-size: 1em;
+        font-weight: 700;
+        margin: 5px 0;
+        color: #6C5B7B;
     }
 
     .emoji {
-        font-size: 1em;
+        font-size: 1.1em;
+        margin-right: 4px;
     }
-</style>
+    </style>
 
 </head>
 <body>
@@ -218,13 +224,11 @@
 
     <div class="content">
         <div class="header">
-            <h1>UN POCO<br>DE TODO</h1>
-            <div class="horario">⏰ LU-SÁ 9:00-21:30</div>
+            <h1>Un Poco de Todo</h1>
         </div>
 
         <div class="main-content">
             <div class="productos-section">
-                <div class="section-title">🛍️ TENEMOS DE TODO</div>
                 <div class="tags">
                     <span class="tag">Despensa</span>
                     <span class="tag">Golosinas</span>
@@ -263,14 +267,14 @@
         </div>
 
         <div class="footer">
+            <div class="horario">⏰ Lunes a Sábados de 9:00 a 21:30</div>
             <div class="contact">
                 <div class="contact-line"><span class="emoji">📍</span> Coronel Vidal 2468</div>
                 <div class="contact-line"><span class="emoji">📱</span> 223-3544303</div>
             </div>
         </div>
     </div>
-</div>
-
+    </div>
 
 </body>
 </html>
